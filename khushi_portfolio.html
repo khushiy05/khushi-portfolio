@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khushi Yewale — AI Engineering Student</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #05050a;
+      color: #ecedee;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* custom scroll */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f0f14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4f46e5;
+      border-radius: 8px;
+    }
+
+    /* glass navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      border-bottom: 0.5px solid rgba(255,255,255,0.06);
+      position: sticky;
+      top: 0;
+      background: rgba(5,5,10,0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #fff 30%, #a5b4fc 80%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      color: #b9b9cf;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: 0.2s ease;
+      letter-spacing: 0.2px;
+    }
+    .nav-links a:hover {
+      color: #c7d2fe;
+      border-bottom: 1px solid #4f46e5;
+      padding-bottom: 4px;
+    }
+
+    /* hero section */
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .orb {
+      position: absolute;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,70,229,0.25) 0%, rgba(79,70,229,0) 75%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(38px);
+      pointer-events: none;
+    }
+    .hero > *:not(.orb) {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex;
+      background: rgba(99,102,241,0.12);
+      border: 0.5px solid rgba(99,102,241,0.4);
+      color: #b9c3ff;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 6px 18px;
+      border-radius: 40px;
+      margin-bottom: 1.6rem;
+      backdrop-filter: blur(2px);
+    }
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+    .hero h1 span {
+      background: linear-gradient(120deg, #a78bfa, #818cf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero p {
+      font-size: 1rem;
+      color: #a1a1b9;
+      max-width: 550px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: #4f46e5;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+      box-shadow: 0 8px 18px rgba(79,70,229,0.25);
+    }
+    .btn-primary:hover {
+      background: #6366f1;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(99,102,241,0.3);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #ddddff;
+      border: 0.5px solid rgba(255,255,255,0.25);
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover {
+      border-color: #818cf8;
+      background: rgba(129,140,248,0.08);
+      color: white;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .divider {
+      border: none;
+      border-top: 0.5px solid rgba(255,255,255,0.05);
+      width: 90%;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 2.5px;
+      color: #818cf8;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 2.2rem;
+      letter-spacing: -0.3px;
+    }
+
+    /* about cards */
+    .about-text {
+      font-size: 0.95rem;
+      color: #b4b4cf;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      max-width: 85%;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.3rem;
+      margin-top: 1rem;
+    }
+    .about-card {
+      background: rgba(20,20,28,0.65);
+      border: 0.5px solid rgba(255,255,255,0.07);
+      border-radius: 24px;
+      padding: 1.5rem;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s;
+    }
+    .about-card:hover {
+      border-color: rgba(129,140,248,0.4);
+      background: rgba(30,30,42,0.7);
+    }
+    .about-card h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #a5b4fc;
+      margin-bottom: 0.7rem;
+      letter-spacing: 1px;
+    }
+    .about-card p {
+      font-size: 0.85rem;
+      color: #c9c9e0;
+      line-height: 1.5;
+    }
+
+    /* skills enhanced */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 1rem;
+    }
+    .skill-pill {
+      background: rgba(18,18,26,0.8);
+      border: 0.5px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 14px 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #cbcbe8;
+      text-align: center;
+      transition: all 0.25s;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .skill-pill:hover {
+      border-color: #6366f1;
+      background: rgba(99,102,241,0.12);
+      transform: translateY(-4px);
+    }
+    .skill-pill img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      transition: transform 0.2s;
+    }
+    .skill-pill:hover img {
+      transform: scale(1.08);
+    }
+
+    /* projects grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.6rem;
+    }
+    .project-card {
+      background: rgba(15,15,22,0.75);
+      border: 0.5px solid rgba(255,255,255,0.07);
+      border-radius: 28px;
+      padding: 1.6rem;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(2px);
+    }
+    .project-card:hover {
+      border-color: rgba(129,140,248,0.6);
+      transform: translateY(-5px);
+      background: rgba(20,20,32,0.9);
+    }
+    .project-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #818cf8;
+      background: rgba(99,102,241,0.15);
+      padding: 4px 12px;
+      border-radius: 40px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .project-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: white;
+    }
+    .project-card p {
+      font-size: 0.8rem;
+      color: #acaccc;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1.2rem;
+    }
+    .stack-tag {
+      font-size: 0.65rem;
+      background: rgba(255,255,255,0.05);
+      padding: 4px 8px;
+      border-radius: 20px;
+      color: #bcbce6;
+    }
+    .project-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .project-link {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #a5b4fc;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+    .project-link:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    /* experience cards */
+    .exp-card {
+      background: rgba(12,12,20,0.6);
+      border: 0.5px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      padding: 1.3rem 1.8rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: 0.2s;
+    }
+    .exp-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4f46e5;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .exp-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #f0f0ff;
+    }
+    .exp-meta {
+      font-size: 0.75rem;
+      color: #818cf8;
+      margin: 5px 0 8px 0;
+    }
+    .exp-content p {
+      font-size: 0.8rem;
+      color: #b0b0ce;
+      line-height: 1.5;
+    }
+
+    /* contact area */
+    .contact-section {
+      text-align: center;
+      padding: 4rem 2rem 5rem;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+    .contact-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #fff, #a5b4fc);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .contact-section p {
+      color: #a0a0c0;
+      margin-bottom: 2rem;
+    }
+    .contact-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 0.5px solid rgba(255,255,255,0.05);
+      font-size: 0.7rem;
+      color: #5f5f83;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 0.8rem 1.2rem;
+      }
+      .nav-links {
+        gap: 1rem;
+      }
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      .section {
+        padding: 2.5rem 1.2rem;
+      }
+      .about-text {
+        max-width: 100%;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      .exp-card {
+        flex-direction: column;
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">✦ Khushi Yewale</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="orb"></div>
+    <div class="hero-badge">AI Engineering · Nagpur, India</div>
+    <h1>I'm <span>Khushi Yewale</span></h1>
+    <p>Building intelligent ML solutions in healthcare, agriculture & business intelligence.</p>
+    <div class="hero-btns">
+      
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <section class="section" id="about">
+    <div class="section-label">About me</div>
+    <div class="section-title">Background & Journey</div>
+    <p class="about-text">I'm a 3rd year B.Tech AI Engineering student at GH Raisoni College of Engineering, Nagpur. I build real-world ML projects across healthcare, agriculture, and business intelligence. Currently interning at Codec Technologies exploring NLP and Reinforcement Learning. I love crafting end-to-end AI solutions that make a tangible impact.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>🎓 Education</h3>
+        <p>B.Tech AI Engineering<br>GH Raisoni College, Nagpur<br>2023–27 · CGPA 7.1</p>
+      </div>
+      <div class="about-card">
+        <h3>⚡ Currently</h3>
+        <p>AI Intern at Codec Technologies<br>March – April 2026<br>ML · Deep Learning · NLP · RL</p>
+      </div>
+      <div class="about-card">
+        <h3>🧠 Interests</h3>
+        <p>Machine Learning, Deep Learning, NLP, Data Analytics, Full Stack Development</p>
+      </div>
+      <div class="about-card">
+        <h3>🤝 Volunteer</h3>
+        <p>Social Intern — Anmol Foundation<br>Lunger Food Donation Drive<br>March 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section" id="skills">
+    <div class="section-label">Tech Stack</div>
+    <div class="section-title">Skills & Tools</div>
+    <div class="skills-grid">
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow"><span>TensorFlow</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" alt="OpenCV"><span>OpenCV</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy"><span>NumPy</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas"><span>Pandas</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"><span>React.js</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js"><span>Node.js</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"><span>JavaScript</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"><span>HTML5</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"><span>CSS3</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL"><span>SQL</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"><span>MongoDB</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1);"><span>GitHub</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma"><span>Figma</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"><span>C</span></div>
+      <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"><span>VS Code</span></div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- PROJECTS with separate links (GitHub & Live Demo) -->
+  <section class="section" id="projects">
+    <div class="section-label">Featured Work</div>
+    <div class="section-title">Projects with Live Links</div>
+    <div class="projects-grid">
+      
+      <!-- Project 1: Brain Tumor Classifier -->
+      <div class="project-card">
+        <div class="project-tag">🧠 Deep Learning · CNN</div>
+        <h3>Brain Tumor Classifier</h3>
+        <p>CNN model to classify brain MRI scans into 4 categories — Glioma, Meningioma, Pituitary, No Tumor — achieving ~89% accuracy. Deployed as a real-time web app.</p>
+        <div class="project-stack">
+          <span class="stack-tag">TensorFlow</span>
+          <span class="stack-tag">Keras</span>
+          <span class="stack-tag">Streamlit</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/khushiy05/Brain-tumor-classifier" target="_blank" class="project-link">📁 GitHub Repo →</a>
+        </div>
+      </div>
+      
+      <!-- Project 2: Crop Recommendation System -->
+      <div class="project-card">
+        <div class="project-tag">🌾 Machine Learning · SIH 2025</div>
+        <h3>Crop Recommendation System</h3>
+        <p>ML system using soil parameters (N, P, K, pH) to recommend crops. Trained on 5,000+ records with 82% accuracy. Selected for Smart India Hackathon.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Random Forest</span>
+          <span class="stack-tag">Scikit-learn</span>
+          <span class="stack-tag">Flask</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/khushiy05/AI-Based-Crop-Recommendation-System" target="_blank" class="project-link">📁 GitHub Repo →</a>
+        </div>
+      </div>
+      
+      <!-- Project 3: Sales Report Dashboard (Power BI) -->
+      <div class="project-card">
+        <div class="project-tag">📊 Data Analytics · Power BI</div>
+        <h3>Sales Report Dashboard</h3>
+        <p>Interactive Power BI dashboard analyzing retail sales across segments and regions, visualizing Sales, Profit & Quantity trends from 2019–2021.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Power BI</span>
+          <span class="stack-tag">DAX</span>
+          <span class="stack-tag">Data Viz</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/khushiy05/Sales-Report-Analysis-Dashboard" target="_blank" class="project-link">📁 GitHub Repo →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section" id="experience">
+    <div class="section-label">Professional Path</div>
+    <div class="section-title">Experience & Leadership</div>
+    <div class="exp-card">
+      <div class="exp-dot"></div>
+      <div class="exp-content">
+        <h3>🤖 AI Intern — Codec Technologies</h3>
+        <div class="exp-meta">March – April 2026 · Nagpur (In-office)</div>
+        <p>1-month intensive internship covering Foundations of AI, Machine Learning, Neural Networks, Deep Learning, NLP, and Reinforcement Learning. Working with NLTK & SpaCy for text processing and building Q-learning models for RL. Developed internal tools for text classification.</p>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-dot" style="background:#10b981;"></div>
+      <div class="exp-content">
+        <h3>❤️ Social Intern — Anmol Foundation (NGO)</h3>
+        <div class="exp-meta">March 2026 · ISO 9001:2015 · NITI AYOG Certified</div>
+        <p>Contributed to the Lunger – Food Donation Drive. Organized food donation activities, coordinated volunteers, managed community outreach, and led a team of 12+ volunteers to distribute meals to underprivileged communities.</p>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-dot" style="background:#f59e0b;"></div>
+      <div class="exp-content">
+        <h3>🏆 Smart India Hackathon 2025</h3>
+        <div class="exp-meta">Sep – Dec 2025 · Internal → National Finals</div>
+        <p>Selected for SIH 2025 under Government of Jharkhand's problem statement "AI-Based Crop Recommendation for Farmers."
+        As a core team member, contributed to building an ML model integrating soil nutrients and weather data — cleared internal round and advanced to national finals.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <div class="contact-section" id="contact">
+    <div class="section-label">Let’s connect</div>
+    <h2>Collaborate & Create</h2>
+    <p>Open to internships, AI/ML collaborations, and innovative projects — feel free to reach out!</p>
+    <div class="contact-btns">
+      <a href="mailto:kyewale479@gmail.com" class="btn-outline">📬 Email Me</a>
+      <a href="https://www.linkedin.com/in/khushi-yewale-44b898375/" target="_blank" class="btn-outline">🔗 LinkedIn</a>
+      <a href="https://github.com/khushiy05" target="_blank" class="btn-outline">🐙 GitHub</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>✦ Designed & built by Khushi Yewale — AI Engineer in the making | 2026 ✦</p>
+    <p style="font-size: 0.7rem; margin-top: 8px;">💡 Every project tells a story. Let’s build the future with AI.</p>
+  </footer>
+
+</body>
+</html>
